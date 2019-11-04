@@ -16,21 +16,31 @@ npm install -S afeiship/react-range
   ```
 2. import js
   ```js
-  import React from 'react';
+  import ReactRange from '../src/main';
   import ReactDOM from 'react-dom';
-  import ReactRange from 'react-range';
-  
-  // your app:
-  class App extends React.Component{
-    render(){
+  import React from 'react';
+  import './assets/style.scss';
+
+  class App extends React.Component {
+    componentDidMount() {}
+    render() {
       return (
-        <ReactRange />
-      )
+        <div className="app-container">
+          <ReactRange
+            min="2"
+            max="10"
+            step="2"
+            defaultValue="4"
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          />
+        </div>
+      );
     }
   }
 
-  // render to dom:
-  ReactDOM.render(<App/>, document.getElementById('app'));
+  ReactDOM.render(<App />, document.getElementById('app'));
   ```
 
 ## documentation

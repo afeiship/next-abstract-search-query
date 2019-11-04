@@ -13,12 +13,13 @@ export default class extends Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
-    value: PropTypes.object,
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    name: PropTypes.string,
     onChange: PropTypes.func
   };
 
   static defaultProps = {
-    value: null,
     onChange: noop
   };
   /*===properties end===*/

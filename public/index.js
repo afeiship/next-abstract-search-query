@@ -8,7 +8,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <ReactRange />
+        <ReactRange
+          min="2"
+          max="10"
+          step="2"
+          defaultValue="4"
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
       </div>
     );
   }
