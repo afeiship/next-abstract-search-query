@@ -35,3 +35,6 @@ npm install -S afeiship/react-range
 
 ## documentation
 - https://afeiship.github.io/react-range/
+
+## resources
+- https://www.w3school.com.cn/jsref/dom_obj_range.asp
