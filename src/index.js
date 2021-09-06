@@ -9,7 +9,8 @@
         this.options = nx.mix(null, defaults, inOptions);
       },
       stringify: function (params) {},
-      parse: function (params) {}
+      parse: function (params) {},
+      update: function (params) {},
     }
   });
 
