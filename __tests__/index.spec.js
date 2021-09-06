@@ -1,12 +1,10 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import BoilerplateReactCompnent from '../src/main';
+(function() {
+  const NxAbstractSearchQuery = require('../src');
 
-describe('Basic Test', () => {
-  test('renders to document', () => {
-    const component = shallow(<BoilerplateReactCompnent />);
-    const cnt = component.find('.react-component');
-    cnt.simulate('click');
-    expect(cnt).toMatch(/Hello React/);
+  describe('NxAbstractSearchQuery.methods', function() {
+    test('init', function() {
+      const data = { key: 1, value: 2 };
+      expect(!!data).toBe(true);
+    });
   });
-});
+})();
