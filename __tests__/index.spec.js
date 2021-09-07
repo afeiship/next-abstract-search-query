@@ -45,7 +45,7 @@
       nxSearchQuery.set('labels', ['lb1', 'lb2']);
       nxSearchQuery.set('labels', ['lb1', 'lb2']);
       nxSearchQuery.set('pageNo', 2);
-      expect(times).toBe(2);
+      expect(times).toBe(3);
       expect(nxSearchQuery.get()).toBe('pageNo=2&pageSize=10&labels=lb1,lb2');
     });
 
@@ -84,7 +84,7 @@
       });
     });
 
-    test('to hash will get the data', () => {
+    test('sets will only trigger one time', () => {
       var times = 0;
       var nxSearchQuery = new NxAbstractSearchQuery(
         {
@@ -97,7 +97,7 @@
         }
       );
       nxSearchQuery.sets({ pageNo: 2, labels: ['x1', 'x2'] });
-      expect(times).toBe(1);
+      expect(times).toBe(2);
       expect(nxSearchQuery.data).toEqual({
         pageNo: 2,
         pageSize: 10,
@@ -105,6 +105,29 @@
         types: [],
         labels: ['x1', 'x2']
       });
+    });
+
+    test('touched will be equal initial', () => {
+      var nxSearchQuery = new NxAbstractSearchQuery({
+        ...initialState
+      });
+      nxSearchQuery.sets({ pageNo: 2, labels: ['x1', 'x2'] });
+      expect(nxSearchQuery.touched).toBe(true);
+      nxSearchQuery.sets({ pageNo: 1, labels: [] });
+      expect(nxSearchQuery.touched).toBe(false);
+    });
+
+    test('event target is null when initial change', () => {
+      var nxSearchQuery = new NxAbstractSearchQuery(
+        {
+          ...initialState
+        },
+        {
+          onChange: (e) => {
+            expect(e.target.value).toEqual(null);
+          }
+        }
+      );
     });
   });
 })();

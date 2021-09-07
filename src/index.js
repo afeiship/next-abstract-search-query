@@ -2,6 +2,7 @@
   var global = typeof window !== 'undefined' ? window : this || Function('return this')();
   var nx = global.nx || require('@jswork/next');
   var nxParam = nx.param || require('@jswork/next-param');
+  var NULL_TARGET = { target: { value: null } };
   var defaults = {
     url: null,
     onChange: nx.noop,
@@ -21,7 +22,14 @@
     properties: {
       touched: function () {
         var value = this.get();
+        return this.initial !== value;
+      },
+      changed: function () {
+        var value = this.get();
         return value !== this.latest;
+      },
+      target: function () {
+        return { target: { value: this.get() } };
       }
     },
     methods: {
@@ -30,6 +38,8 @@
         this.data = inData;
         this.options = nx.mix(null, defaults, inOptions);
         this.latest = null;
+        this.initial = this.get();
+        this.__onChange__(NULL_TARGET);
       },
       get: function () {
         var { url, transform, isEmpty } = this.options;
@@ -38,13 +48,9 @@
       set: function (inKey, inValue) {
         this.options.set(this.data, inKey, inValue);
         var value = this.get();
-        if (this.touched) {
+        if (this.changed) {
           this.latest = value;
-          if (!this.__muted__) {
-            this.options.onChange({
-              target: { value: value }
-            });
-          }
+          this.__onChange__();
         }
       },
       sets: function (inObj) {
@@ -54,9 +60,13 @@
           self.set(key, value);
         });
         this.__muted__ = false;
-        this.options.onChange({
-          target: { value: this.get() }
-        });
+        this.__onChange__();
+      },
+      __onChange__: function (inTarget) {
+        if (!this.__muted__) {
+          var target = typeof inTarget === 'undefined' ? this.target : inTarget;
+          this.options.onChange(target);
+        }
       }
     }
   });

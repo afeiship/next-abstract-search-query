@@ -72,6 +72,7 @@ console.log(nxsq.data);
 const defaults = {
   url: null,
   onChange: nx.noop,
+  onInit: nx.noop,
   set: function (data, key, value) {
     nx.set(data, key, value);
   },
