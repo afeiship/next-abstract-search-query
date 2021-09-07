@@ -1,6 +1,6 @@
 {
   "name": "@jswork/next-abstract-search-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Abstract search query for next.",
   "homepage": "https://github.com/afeiship/next-abstract-search-query",
   "author": {
@@ -40,5 +40,13 @@
   },
   "dependencies": {
     "@jswork/next-param": "^1.0.3"
-  }
+  },
+  "keywords": [
+    "next",
+    "search",
+    "filter",
+    "query",
+    "encode",
+    "decode"
+  ]
 }
