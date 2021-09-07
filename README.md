@@ -80,7 +80,7 @@ const defaults = {
   },
   transform: function (key, value) {
     var _value = Array.isArray(value) ? value.join() : value;
-    return key + CHAR_EQ + _value;
+    return key + '=' + _value;
   }
 };
 ```

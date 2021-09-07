@@ -2,7 +2,6 @@
   var global = typeof window !== 'undefined' ? window : this || Function('return this')();
   var nx = global.nx || require('@jswork/next');
   var nxParam = nx.param || require('@jswork/next-param');
-  var CHAR_EQ = '=';
   var defaults = {
     url: null,
     onChange: nx.noop,
@@ -14,7 +13,7 @@
     },
     transform: function (key, value) {
       var _value = Array.isArray(value) ? value.join() : value;
-      return key + CHAR_EQ + _value;
+      return key + '=' + _value;
     }
   };
 
