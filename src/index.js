@@ -26,6 +26,7 @@
       }
     },
     methods: {
+      __muted__: false,
       init: function (inData, inOptions) {
         this.data = inData;
         this.options = nx.mix(null, defaults, inOptions);
@@ -40,10 +41,23 @@
         var value = this.get();
         if (this.touched) {
           this.latest = value;
-          this.options.onChange({
-            target: { value: value }
-          });
+          if (!this.__muted__) {
+            this.options.onChange({
+              target: { value: value }
+            });
+          }
         }
+      },
+      sets: function (inObj) {
+        var self = this;
+        this.__muted__ = true;
+        nx.forIn(inObj, function (key, value) {
+          self.set(key, value);
+        });
+        this.__muted__ = false;
+        this.options.onChange({
+          target: { value: this.get() }
+        });
       }
     }
   });

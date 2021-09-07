@@ -12,9 +12,11 @@ npm install -S @jswork/next-abstract-search-query
 ```
 
 ## apis
-| api | params | description   |
-| --- | ------ | ------------- |
-| get | -      | desc balabala |
+| api  | params | description               |
+| ---- | ------ | ------------------------- |
+| get  | -      | Get qs like string.       |
+| set  | -      | Set key/value.            |
+| sets | -      | Set key/value use object. |
 
 ## usage
 ```js
@@ -49,6 +51,9 @@ nxsq.get()
 nxsq.set('labels', ['lb1', 'lb2']);
 nxsq.get();
 // 'pageNo=1&pageSize=10&labels=lb1,lb2'
+
+// sets
+nxsq.sets({ pageNo:2, pageSize:20 });
 
 // get inner data
 console.log(nxsq.data);

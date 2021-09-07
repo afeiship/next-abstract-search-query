@@ -83,5 +83,28 @@
         labels: ['lb1', 'lb2']
       });
     });
+
+    test('to hash will get the data', () => {
+      var times = 0;
+      var nxSearchQuery = new NxAbstractSearchQuery(
+        {
+          ...initialState
+        },
+        {
+          onChange: function (params) {
+            times++;
+          }
+        }
+      );
+      nxSearchQuery.sets({ pageNo: 2, labels: ['x1', 'x2'] });
+      expect(times).toBe(1);
+      expect(nxSearchQuery.data).toEqual({
+        pageNo: 2,
+        pageSize: 10,
+        keyword: '',
+        types: [],
+        labels: ['x1', 'x2']
+      });
+    });
   });
 })();
