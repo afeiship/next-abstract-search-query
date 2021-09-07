@@ -13,14 +13,53 @@ npm install -S @jswork/next-abstract-search-query
 
 ## apis
 | api | params | description   |
-|-----|--------|---------------|
+| --- | ------ | ------------- |
 | get | -      | desc balabala |
 
 ## usage
 ```js
 import NxAbstractSearchQuery from '@jswork/next-abstract-search-query';
 
-// code goes here:
+const initialState = {
+  pageNo: 1,
+  pageSize: 10,
+  keyword: '',
+  types: [],
+  labels: []
+};
+
+const nxsq = new NxAbstractSearchQuery(initialState, {
+  set: function(data,key,value){
+    nx.set(data, key, value);
+    if (!key.includes('page')) {
+      data.pageNo = 1;
+    }
+  },
+  onChange: function(inEvent){
+    console.log(inEvent.target.value);
+  }
+});
+
+// set/get
+
+nxsq.set('pageNo', 2);
+nxsq.get()
+// 'pageNo=2&pageSize=10'
+
+nxsq.set('labels', ['lb1', 'lb2']);
+nxsq.get();
+// 'pageNo=1&pageSize=10&labels=lb1,lb2'
+
+// get inner data
+console.log(nxsq.data);
+
+{
+  pageNo: 2,
+  pageSize: 10,
+  keyword: '',
+  types: [],
+  labels: ['lb1', 'lb2']
+}
 ```
 
 ## license

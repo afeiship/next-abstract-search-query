@@ -37,5 +37,8 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@jswork/next-param": "^1.0.3"
   }
 }
