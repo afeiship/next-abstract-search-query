@@ -12,11 +12,11 @@ npm install -S @jswork/next-abstract-search-query
 ```
 
 ## apis
-| api  | params | description               |
-| ---- | ------ | ------------------------- |
-| get  | -      | Get qs like string.       |
-| set  | -      | Set key/value.            |
-| sets | -      | Set key/value use object. |
+| api  | params      | description               |
+| ---- | ----------- | ------------------------- |
+| get  | -           | Get qs like string.       |
+| set  | (key,value) | Set key/value.            |
+| sets | (obj)       | Set key/value use object. |
 
 ## usage
 ```js
@@ -65,6 +65,24 @@ console.log(nxsq.data);
   types: [],
   labels: ['lb1', 'lb2']
 }
+```
+
+## defaults
+```js
+const defaults = {
+  url: null,
+  onChange: nx.noop,
+  set: function (data, key, value) {
+    nx.set(data, key, value);
+  },
+  isEmpty: function (value) {
+    return !value || value.length === 0;
+  },
+  transform: function (key, value) {
+    var _value = Array.isArray(value) ? value.join() : value;
+    return key + CHAR_EQ + _value;
+  }
+};
 ```
 
 ## license
