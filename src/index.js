@@ -6,9 +6,7 @@
   var defaults = {
     url: null,
     onChange: nx.noop,
-    set: function (data, key, value) {
-      nx.set(data, key, value);
-    },
+    set: nx.set,
     isEmpty: function (value) {
       return !value || value.length === 0;
     },
