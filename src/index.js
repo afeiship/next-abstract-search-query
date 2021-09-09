@@ -45,24 +45,18 @@
       },
       set: function (inKey, inValue) {
         this.options.set(this.data, inKey, inValue);
-        var value = this.get();
-        if (this.changed) {
-          this.latest = value;
-          this.__onChange__();
-        }
+        this.__onChange__();
       },
       sets: function (inObj) {
-        var self = this;
         this.__muted__ = true;
-        nx.forIn(inObj, function (key, value) {
-          self.set(key, value);
-        });
+        nx.forIn(inObj, this.set, this);
         this.__muted__ = false;
         this.__onChange__();
       },
       __onChange__: function (inTarget) {
-        if (!this.__muted__) {
+        if (!this.__muted__ && this.changed) {
           var target = typeof inTarget === 'undefined' ? this.target : inTarget;
+          this.latest = this.get();
           this.options.onChange(target);
         }
       }
